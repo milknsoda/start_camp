@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        h3 {
+            color: black;
+        }
+        .a {
+            color: palevioletred;
+        }
+    </style>
+    <title>과연?</title>
+</head>
+<body>
+    <h2>{{ name }}을 만들때</h2>
+    <hr>
+    {% for f in range(3) %}
+        {% if string[f] == '도 조금 넣고' %}    
+            <img src="/static/조금.png" width="300" height="300">
+        {% elif string[f] == '은(는) 적당히..' %}
+            <img src="/static/적당히.png" width="300" height="300">
+        {% elif string[f] == '...' %}
+            <img src="/static/쩜쩜쩜.png" width="300" height="300">
+        {% elif string[f] == '은(는) 조금만...우아ㅏ아ㅏㅏ악' %}
+            <img src="/static/으어어억.png" width="300" height="300">
+        {% else %}
+            <img src="/static/필요없고.png" width="300" height="300">
+        {% endif %}    
+        <h3><span class="a">{{ fit[f] }}</span>{{ string[f] }}</h3>
+    {% endfor %}   
+</body>
+</html>
