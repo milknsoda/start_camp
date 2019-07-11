@@ -34,52 +34,40 @@ response = requests.get(url).json()
 #     print('3등')
 #     ...
 
-
-# a, b, c, d, e, f = 0, 0, 0, 0, 0, 0
-result = [0, 0, 0, 0, 0]
-
-for i in range(10000000):
-    nums = {}
+result = [0, 0, 0, 0, 0, 0]
+win_num = []
+bns_num = 0
+for key, value in response.items():
+    if 'drwtNo' in key:
+        win_num.append(value)
+    if 'bnusNo' in key:
+        bns_num = value
+for ind in range(10000000):
     my_lotto = random.sample(range(1, 46), 6)
-    for key, value in response.items():
-        if 'drwtNo' in key:
-            nums[value] = '당첨번호'
-        if 'bnusNo' in key:
-            nums[value] = '보너스번호'
+    # print(sorted(my_lotto))
+    # print(sorted(win_num))
 
     count = 0
-    bonus = 0
     for i in my_lotto:
-        for num in nums:
-            if i == int(num):
+        for k in win_num:
+            if i == int(k):
                 count += 1
-            if nums[num] == '보너스번호':
-                bonus += 1
+    # print(count)
 
-    if count == 3:
-        # print('5등!')
-        # e += 1
-        result[4] += 1
-    elif count == 4:
-        # print('4등!')
-        # d += 1
-        result[3] += 1
-    elif count == 5:
-        # print('3등!')
-        # c += 1
-        result[2] += 1
-    elif count == 5 and bonus == 1:
-        # print('2등!!!')
-        # b += 1
-        result[1] += 1
-    elif count >= 6:
-        # print('1등!!!!!')
-        # a += 1
+    if count == 6:
         result[0] += 1
+    elif count == 5 and bns_num in my_lotto:
+        result[1] += 1
+    elif count == 5:
+        result[2] += 1
+    elif count == 4:
+        result[3] += 1
+    elif count == 3:
+        result[4] += 1
     else:
-        # print('꽝!!')
-        # f += 1
-        None
+        result[5] += 1
+
     print(result, end='\r')
 print('끝')
-print(sum(result))
+print(result)
+
