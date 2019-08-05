@@ -56,5 +56,17 @@ def result():
     weather = request.args.get('weather')
     return render_template('result.html', mood=mood, weather=weather)
 
+@app.route('/lotto')
+def lotto():
+    return render_template('lotto.html')
+
+@app.route('/lotto_result')
+def lotto_result():
+    name = request.args.get('name')
+    num = request.args.get('num')
+    random.seed(num) # seed를 부여하면 동일한 시드에선 동일한 랜덤값이 출력
+    numbers = random.sample(range(1, 46), 6)
+    return render_template('lotto_result.html', name=name, num=numbers)
+
 if __name__ == '__main__':
     app.run(debug=True)
